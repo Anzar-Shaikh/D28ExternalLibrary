@@ -1,6 +1,7 @@
 package programmes;
 
 
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -66,6 +67,14 @@ public class AddressBook {
             PrintWriter printWriter = new PrintWriter("addressBook.txt");
             printWriter.println(addressBook.list);
         }catch (Exception e ){
+            System.out.println(e.getMessage());
+        }
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter("addressBook.json"));
+            Gson gson = new Gson();
+            gson.toJson(list,br);
+            br.close();
+        }catch (IOException e){
             System.out.println(e.getMessage());
         }
         try {
